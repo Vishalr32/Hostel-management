@@ -1,0 +1,100 @@
+SHOW DATABASES;
+
+CREATE DATABASE assign8;
+USE assign8;
+
+create table STUDENT(Student_id INT NOT NULL PRIMARY KEY , Student_name varchar(255) , dob DATE , Gender varchar(10) , Student_city varchar(255) , email_id varchar(255) ,  Contact_no BIGINT);
+describe STUDENT;
+ 
+create table STAFF(Staff_id INT NOT NULL PRIMARY KEY , Staff_name varchar(255), Role varchar(255) , Gender varchar(10) , Staff_city varchar(255));
+describe STAFF;
+
+create table PAYMENTS(Payment_id INT NOT NULL PRIMARY KEY , Payment_Amount INT , Payment_Date DATE , Payment_Mode varchar(255));
+describe PAYMENTS;
+
+create table ROOM(Room_no INT NOT NULL PRIMARY KEY , Room_type varchar(255) , Room_occupancy varchar(255));
+describe ROOM; 
+
+create table Room_Allotment(Student_id INT NOT NULL PRIMARY KEY , Student_name varchar(255) , Room_no INT , Allot_date DATE , Rental_period INT);
+describe Room_Allotment;
+
+create table Room_Vacating(Student_id INT NOT NULL PRIMARY KEY , Student_name varchar(255) , Room_no INT , Vacating_date DATE);
+describe Room_Vacating;
+
+create table STUDENT_TABLE_1(Student_id INT , email_id varchar(255) , dob DATE , Gender char(10) , Student_city varchar(255));
+describe STUDENT_TABLE_1;
+
+create table STUDENT_TABLE_2(Student_id INT NOT NULL , Contact_no BIGINT NOT NULL , PRIMARY KEY(Student_id,Contact_no));
+describe STUDENT_TABLE_2;
+
+create table STUDENT_TABLE_3(Student_id INT NOT NULL PRIMARY KEY , Student_Fname varchar(255) , Student_Mname varchar(255) , Student_Lname varchar(255));
+describe STUDENT_TABLE_3;
+
+create table STAFF_TABLE_1(Staff_id INT , Role varchar(255) , Gender char(255) , Staff_city varchar(255));
+describe STAFF_TABLE_1;
+
+create table STAFF_TABLE_2(Staff_id INT NOT NULL PRIMARY KEY , Staff_Fname varchar(255) , Staff_Mname varchar(255) , Staff_Lname varchar(255));
+describe STAFF_TABLE_2;
+
+create table PAYMENTS_TABLE_1(Payment_id INT NOT NULL PRIMARY KEY , Payment_Date DATE , Payment_Mode varchar(255) , Payment_Amount INT);
+describe PAYMENTS_TABLE_1;
+
+create table ROOM_TABLE_1(Room_no INT NOT NULL PRIMARY KEY , Room_type varchar(255) , Room_occupancy varchar(255));
+describe ROOM_TABLE_1; 
+
+create table ROOM_ALLOTMENT_TABLE_1(Student_id INT , Room_no INT , Allot_date DATE , Rental_period INT);
+describe ROOM_ALLOTMENT_TABLE_1;
+
+create table ROOM_ALLOTMENT_TABLE_2(Student_id INT NOT NULL PRIMARY KEY , Student_Fname varchar(255) , Student_Mname varchar(255) , Student_Lname varchar(255));
+describe ROOM_ALLOTMENT_TABLE_2;
+
+create table ROOM_VACATING_TABLE_1(Student_id INT , Room_no INT , Vacating_date DATE);
+describe ROOM_VACATING_TABLE_1;
+
+create table ROOM_VACATING_TABLE_2(Student_id INT NOT NULL PRIMARY KEY , Student_Fname varchar(255) , Student_Mname varchar(255) , Student_Lname varchar(255));
+describe ROOM_VACATING_TABLE_2;
+
+insert into STUDENT_TABLE_1 values ('2001001','a@iiitg.ac.in','2002-01-23','M','A') , ('2001002','b@iiitg.ac.in','2002-02-21','F','B') , ('2001003','c@iiitg.ac.in','2002-03-12','F','C') , ('2001004','d@iiitg.ac.in','2001-01-23','M','D') , ('2001005','e@iiitg.ac.in','2002-04-23','M','E') , ('2001006','g@iiitg.ac.in','2002-04-29','M','G') , ('2001007','h@iiitg.ac.in','2001-05-16','F','H') , ('2001008','i@iiitg.ac.in','2002-01-19','F','I') , ('2001009','j@iiitg.ac.in','2002-09-23','F','J') , ('2001010','K@iiitg.ac.in','2001-08-03','M','K');
+select * from STUDENT_TABLE_1;
+
+insert into STUDENT_TABLE_2 values ('2001001','9508659659') , ('2001001','8479657685') , ('2001003','4875947555') , ('2001004','4558578496') , ('2001005','6798549545') , ('2001006','9842367545') , ('2001007','9573856555') , ('2001008','9437564875') , ('2001009','7943856767') , ('2001010','9854376786');
+select * from STUDENT_TABLE_2;
+
+insert into STUDENT_TABLE_3 values ('2001001','F1','M1','L1') , ('2001002','F2','M2','L2') , ('2001003','F3','M3','L3') , ('2001004','F4','M4','L4') , ('2001005','F5','M5','L5') , ('2001006','F6','M6','L6') , ('2001007','F7','M7','L7') , ('2001008','F8','M8','L8') , ('2001009','F9','M9','L9') , ('2001010','F10','M10','L10');
+select * from STUDENT_TABLE_3;
+
+alter table STUDENT_TABLE_1 add constraint fk_student_table_3 foreign key(Student_id) references STUDENT_TABLE_3(Student_id) on delete cascade;
+describe STUDENT_TABLE_1;
+
+insert into STAFF_TABLE_1 values ('1','R1','M','C1') , ('2','R2','M','C2') , ('3','R3','F','C3') , ('4','R4','M','C4') , ('5','R5','F','C5') , ('6','R6','M','C6') , ('7','R7','F','C7') , ('8','R8','M','C8') , ('9','R9','M','C9') , ('10','R10','F','C10');
+select * from STAFF_TABLE_1;
+
+insert into STAFF_TABLE_2 values ('1','F1','M1','L1') , ('2','F2','M2','L2') , ('3','F3','M3','L3') , ('4','F4','M4','L4') , ('5','F5','M5','L5') , ('6','F6','M6','L6') , ('7','F7','M7','L7') , ('8','F8','M8','L8') , ('9','F9','M9','L9') , ('10','F10','M10','L10');
+select * from STAFF_TABLE_2;
+
+alter table STAFF_TABLE_1 add constraint fk_staff foreign key(Staff_id) references STAFF_TABLE_2(Staff_id) on delete cascade;
+describe STAFF_TABLE_1;
+
+insert into PAYMENTS_TABLE_1 values ('11','2022-02-22','SBI COLLECT','112500') , ('22','2022-01-24','CASH','116500') , ('33','2022-01-10','SBI COLLECT','129000') , ('44','2021-12-28','CASH','112500') , ('55','2022-01-02','SBI COLLECT','116500') , ('66','2022-02-02','CASH','129000') , ('77','2021-12-22','SBI COLLECT','112500') , ('88','2021-12-24','CASH','116500') , ('99','2022-01-04','SBI COLLECT','129000') , ('111','2022-02-06','CASH','141000');
+select * from PAYMENTS_TABLE_1;
+
+insert into ROOM_TABLE_1 values ('601','AC','FULL') , ('602','NON-AC','EMPTY') , ('603','AC','EMPTY') , ('604','NON-AC','FULL') , ('605','AC','FULL') , ('606','NON-AC','EMPTY') , ('607','AC','FULL') , ('608','NON-AC','FULL') , ('609','AC','EMPTY') , ('610','NON-AC','EMPTY');
+select * from ROOM_TABLE_1;
+
+insert into ROOM_ALLOTMENT_TABLE_1 values ('2001001','601','2021-12-15','16') , ('2001002','602','2021-12-19','30') , ('2001003','603','2021-12-23','20') , ('2001004','604','2021-12-27','18') , ('2001005','605','2021-12-31','24') , ('2001006','606','2022-01-04','22') , ('2001007','607','2022-01-08','31') , ('2001008','608','2022-01-12','20') , ('2001009','609','2022-01-16','18') , ('2001010','610','2022-01-20','31');
+select * from ROOM_ALLOTMENT_TABLE_1;
+
+insert into ROOM_ALLOTMENT_TABLE_2 values ('2001001','F1','M1','L1') , ('2001002','F2','M2','L2') , ('2001003','F3','M3','L3') , ('2001004','F4','M4','L4') , ('2001005','F5','M5','L5') , ('2001006','F6','M6','L6') , ('2001007','F7','M7','L7') , ('2001008','F8','M8','L8') , ('2001009','F9','M9','L9') , ('2001010','F10','M10','L10');
+select * from ROOM_ALLOTMENT_TABLE_2;
+
+alter table ROOM_ALLOTMENT_TABLE_1 add constraint fk_room_allotment foreign key(Student_id) references ROOM_ALLOTMENT_TABLE_2(Student_id) on delete cascade;
+describe ROOM_ALLOTMENT_TABLE_1;
+
+insert into ROOM_VACATING_TABLE_1 values ('2001001','601','2021-12-30') , ('2001002','602','2022-01-17') , ('2001003','603','2022-01-11') , ('2001004','605','2022-01-13') , ('2001005','605','2022-01-23') , ('2001006','606','2022-01-25') , ('2001007','607','2022-02-07') , ('2001008','608','2022-01-31') , ('2001009','609','2022-02-02') , ('2001010','610','2022-02-19');
+select * from ROOM_VACATING_TABLE_1;
+
+insert into ROOM_VACATING_TABLE_2 values ('2001001','F1','M1','L1') , ('2001002','F2','M2','L2') , ('2001003','F3','M3','L3') , ('2001004','F4','M4','L4') , ('2001005','F5','M5','L5') , ('2001006','F6','M6','L6') , ('2001007','F7','M7','L7') , ('2001008','F8','M8','L8') , ('2001009','F9','M9','L9') , ('2001010','F10','M10','L10');
+select * from ROOM_VACATING_TABLE_2;
+
+alter table ROOM_VACATING_TABLE_1 add constraint fk_room_vacating foreign key(Student_id) references ROOM_VACATING_TABLE_2(Student_id) on delete cascade;
+describe ROOM_VACATING_TABLE_1;

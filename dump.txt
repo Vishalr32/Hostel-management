@@ -1,0 +1,18 @@
+SHOW VARIABLES LIKE "secure_file_priv";
+
+C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/CSV
+
+
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/CSV.csv'
+INTO TABLE country
+FIELDS TERMINATED BY ',';
+
+
+TABLE country
+INTO OUTFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/output.csv'
+FIELDS TERMINATED BY ','
+OPTIONALLY ENCLOSED BY '"'
+ESCAPED BY ''
+LINES TERMINATED BY '\n';
+
+TABLE country INTO OUTFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/output.csv' FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"' ESCAPED BY '' LINES TERMINATED BY '\n';
